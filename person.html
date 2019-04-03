@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+        table 
+        {
+            width: 70%;
+            font: 17px Calibri;
+        }
+        table, th, td 
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+	getPersons = function(){
+		var personList = [];
+		if(localStorage.getItem('persons')!=null){
+		   personList = JSON.parse(localStorage.getItem('persons'));
+		}
+		return personList;
+	}
+
+    addPerson = function(Id, namee, email, phone, address){
+    	var personList = getPersons();
+    	var person = {};
+    	person.Id = Id;
+    	person.namee = namee;
+    	person.email = email;
+    	person.phone = phone;
+    	person.address = address;
+
+    	personList.push(person);
+    	localStorage.setItem('persons', JSON.stringify(personList));
+    }
+
+    showPersons = function(){
+    	var personList = getPersons();
+    	console.log("Total no. of records:"+ personList.length);
+    	if(personList.length>0){
+    	console.log("Id | Name | Email | Phone | Address");
+    	for(var i=0;i<personList.length;i++){
+    	    console.log(personList[i].Id+" | "+personList[i].namee+" | "+personList[i].email+" | "+personList[i].phone+" | "+personList[i].address);
+            }
+           } 
+        
+    }
+
+    deleteALLPerson = function(){
+    	localStorage.clear('persons');
+    }
+
+    deletePerson = function(){
+       var personList = getPersons();
+       	   personList.pop();
+           localStorage.setItem('persons', JSON.stringify(personList));
+       }
+
+    displayPerson = function(){
+    	var personList = getPersons();
+    	if(personList.length>0) {
+            for(var i=0;i<personList.length;i++){
+            document.getElementById("Id").innerHTML = personList[i].Id;
+            document.getElementById("Name").innerHTML = personList[i].namee;
+            document.getElementById("Email").innerHTML = personList[i].email;
+            document.getElementById("Phone").innerHTML = personList[i].phone;
+            document.getElementById("Address").innerHTML = personList[i].address;
+            }
+
+        }
+    }
+    
+
+</script>
+<h2>Hello</h2>
+<button type="" onclick="deletePerson()">Delete Last Person</button> | 
+<button type="" onclick="showPersons()">Show Persons</button> | 
+<button type="" onclick="deleteALLPerson()">Delete All Persons</button> |
+<button type="" onclick="displayPerson()">Display</button><hr/>
+    <form>
+    	<input type="text" name="Id" placeholder="Enter Id"><br><br>
+    	<input type="text" name="namee" placeholder="Enter Name"><br><br>
+    	<input type="text" name="email" placeholder="Enter Email"><br><br>
+    	<input type="text" name="phone" placeholder="Enter Phone"><br><br>
+    	<input type="text" name="address" placeholder="Enter Address"><br><br>
+    	<input type="button" name="" value="Add Person" onclick="addPerson(Id.value, namee.value, email.value, phone.value, address.value)"><br><br>
+    </form>
+    
+	<div id="display">
+	<table>
+	  <tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>Address</th>
+	  </tr>
+
+	  <tr>
+		<td id="Id"></td>
+		<td id="Name"></td>
+		<td id="Email"></td>
+		<td id="Phone"></td>
+		<td id="Address"></td>
+		
+	  </tr>
+
+
+
+	</div>
+
+</body>
+</html>

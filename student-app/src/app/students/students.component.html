@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>
+    Welcome to Students App!
+  </h1>
+  <button class="btn btn-danger" (click)="logout()">Logout</button>
+  <hr/>
+  <h3>Enter Details</h3>
+  <div class="row">
+  <div class="col-sm-4">
+  <input class="form-control" type="text" placeholder="Id" [(ngModel)]="student.id" readonly><br><br>
+  <input class="form-control" type="text" placeholder="First Name" [(ngModel)]="student.firstName"><br><br>
+  <input class="form-control" type="text" placeholder="Last Name" [(ngModel)]="student.lastName"><br><br>
+  <input class="form-control" type="text" placeholder="Email" [(ngModel)]="student.email"><br><br>
+  <input class="form-control" type="text" placeholder="Phone" [(ngModel)]="student.phone"><br><br>
+  <input class="btn btn-success" type="button" value="Add/Update Student" (click)="addUpdateStudents(student)"> | <button class="btn btn-danger" (click)="deleteAllStudents()">Delete All Students</button><br><br>
+  </div>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-7">
+  <table class= "table table-bordered">
+  	<tr  *ngFor="let s of students">
+  	<td> {{s.id}} </td>
+  	<td> {{s.firstName}} </td>
+  	<td> {{s.lastName}} </td> 
+  	<td> {{s.email}} </td>
+  	<td> {{s.phone}} </td> 
+  	<td> <button class="btn btn-info" (click)="deleteStudent(s)">X</button> </td>
+  	<td> <button class="btn btn-info" (click)="selectStudent(s)">Select</button></td>
+  </tr>
+</table>
+</div>
+
+</div>
+
+</div>
